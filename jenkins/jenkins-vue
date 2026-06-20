@@ -36,6 +36,7 @@ pipeline {
         }
 
         stage('编译与打包') {
+            stages{
                 stage('编译') {
                     steps {
                         script {
@@ -54,8 +55,9 @@ pipeline {
                         }       
                     }
                 }
-        }
+            }
 
+        }
 
         stage('重启') {
             steps {
