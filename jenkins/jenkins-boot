@@ -43,7 +43,8 @@ pipeline {
                             sshCommand remote: remote_config, command: """
                                 echo '准备环境'
                             """
-                            env.ENV_READY = "true"
+                            sleep 5
+                            env.STAGE_BEFORE_COMPILE_PREPARE_ENV_READY = "true"
                         }       
                     }
                 }
@@ -51,7 +52,7 @@ pipeline {
                     steps {
                         script {
                             waitUntil {
-                                return env.ENV_READY == "true"
+                                return env.STAGE_BEFORE_COMPILE_PREPARE_ENV_READY == "true"
                             }
                             sshCommand remote: remote_config, command: """
                                 echo 'postgres 初始化'
@@ -64,19 +65,24 @@ pipeline {
         }
 
         stage('编译与打包') {
-            stages{
+            parallel{
                 stage('编译') {
                     steps {
                         script {
                             sshCommand remote: remote_config, command: """
                                 echo '编译'
                             """
+                            sleep 5
+                            env.STAGE_COMPILE_COMPILE = "true"
                         }       
                     }
                 }
                 stage('打包') {
                     steps {
                         script {
+                            waitUntil {
+                                return env.STAGE_COMPILE_COMPILE == "true"
+                            }
                             sshCommand remote: remote_config, command: """
                                 echo '打包'
                             """
