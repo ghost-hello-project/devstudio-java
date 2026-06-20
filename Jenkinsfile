@@ -9,18 +9,17 @@ pipeline {
         stage('Deploy via SSH') {
             steps {
                 script {
-                    // 1. 动态构建远程连接对象
-                    def remote = [:]
-                    remote.name = 'ubuntu-devsutdio'
-                    remote.host = env.DEPLOY_HOST
-                    remote.user = env.DEPLOY_USER
-                    remote.allowAnyHosts = true
+                def remote = [:]
+                remote.name = 'test'
+                remote.host = '192.1638.56.102'
+                remote.user = 'laolang'
+                remote.password = 'fcl1164891'
+                remote.allowAnyHosts = true
 
-                    // 3. 在远程服务器上执行 Shell 命令
-                    stage('Execute Commands') {
-                        sshCommand remote: remote, command: "ls -lrt"
-                        sshCommand remote: remote, command: "echo 'Hello World!'"
-                    }
+                stage('Execute Commands') {
+                    sshCommand remote: remote, command: "ls -la"
+                    sshCommand remote: remote, command: "echo 'Hello World!'"
+                }
                 }
             }
         }
