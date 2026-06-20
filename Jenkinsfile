@@ -14,7 +14,6 @@ pipeline {
                     remote.name = 'ubuntu-devsutdio'
                     remote.host = env.DEPLOY_HOST
                     remote.user = env.DEPLOY_USER
-                    remote.identityFile = "/var/jenkins_home/.ssh/${env.CREDENTIAL_ID}"
                     remote.allowAnyHosts = true
 
                     // 3. 在远程服务器上执行 Shell 命令
