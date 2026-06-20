@@ -25,20 +25,103 @@ pipeline {
             }
         }
 
-        stage('Execute Commands Stage 1') {
+        stage('克隆代码') {
             steps {
                 script {
-                    // 在另一个 stage 中直接使用初始化好的 remote_config
-                    sshCommand remote: remote_config, command: "ls -la"
+                    sshCommand remote: remote_config, command: """
+                        echo '克隆代码'
+                    """
                 }
             }
         }
 
-        stage('Execute Commands Stage 2') {
+        stage('编译') {
+            parallel {
+                stage('java 编译') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo 'java 编译'
+                            """
+                        }       
+                    }
+                }
+                stage('前端 编译') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo '前端编译'
+                            """
+                        }       
+                    }
+                }
+                
+            }
+        }
+
+        stage('docker') {
+            parallel {
+                stage('java docker') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo 'java docker'
+                            """
+                        }       
+                    }
+                }
+                stage('前端 docker') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo '前端 docker'
+                            """
+                        }       
+                    }
+                }
+                
+            }
+        }
+
+        stage('重启') {
             steps {
                 script {
-                    // 跨 stage 依然可以使用
-                    sshCommand remote: remote_config, command: "echo 'Hello World!'"
+                    sshCommand remote: remote_config, command: """
+                        echo '重启'
+                    """
+                }
+            }
+        }
+
+        stage('check') {
+            parallel {
+                stage('java check') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo 'java check'
+                            """
+                        }       
+                    }
+                }
+                stage('前端 check') {
+                    steps {
+                        script {
+                            sshCommand remote: remote_config, command: """
+                                echo '前端 check'
+                            """
+                        }       
+                    }
+                }
+            }
+        }
+
+        stage('junit') {
+            steps {
+                script {
+                    sshCommand remote: remote_config, command: """
+                        echo 'junit'
+                    """
                 }
             }
         }
