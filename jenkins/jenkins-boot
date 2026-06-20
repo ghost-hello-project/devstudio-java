@@ -35,53 +35,48 @@ pipeline {
             }
         }
 
-        stage('编译') {
-            parallel {
-                stage('java 编译') {
+        stage('编译前置') {
+                stage('准备环境') {
                     steps {
                         script {
                             sshCommand remote: remote_config, command: """
-                                echo 'java 编译'
+                                echo '准备环境'
                             """
                         }       
                     }
                 }
-                stage('前端 编译') {
+                stage('postgres 初始化') {
                     steps {
                         script {
                             sshCommand remote: remote_config, command: """
-                                echo '前端编译'
+                                echo 'postgres 初始化'
                             """
                         }       
                     }
                 }
-                
-            }
         }
 
-        stage('docker') {
-            parallel {
-                stage('java docker') {
+        stage('编译与打包') {
+                stage('编译') {
                     steps {
                         script {
                             sshCommand remote: remote_config, command: """
-                                echo 'java docker'
+                                echo '编译'
                             """
                         }       
                     }
                 }
-                stage('前端 docker') {
+                stage('打包') {
                     steps {
                         script {
                             sshCommand remote: remote_config, command: """
-                                echo '前端 docker'
+                                echo '打包'
                             """
                         }       
                     }
                 }
-                
-            }
         }
+
 
         stage('重启') {
             steps {
@@ -94,33 +89,20 @@ pipeline {
         }
 
         stage('check') {
-            parallel {
-                stage('java check') {
-                    steps {
-                        script {
-                            sshCommand remote: remote_config, command: """
-                                echo 'java check'
-                            """
-                        }       
-                    }
-                }
-                stage('前端 check') {
-                    steps {
-                        script {
-                            sshCommand remote: remote_config, command: """
-                                echo '前端 check'
-                            """
-                        }       
-                    }
+            steps {
+                script {
+                    sshCommand remote: remote_config, command: """
+                        echo 'check'
+                    """
                 }
             }
         }
 
-        stage('junit') {
+        stage('单测') {
             steps {
                 script {
                     sshCommand remote: remote_config, command: """
-                        echo 'junit'
+                        echo '单测'
                     """
                 }
             }
