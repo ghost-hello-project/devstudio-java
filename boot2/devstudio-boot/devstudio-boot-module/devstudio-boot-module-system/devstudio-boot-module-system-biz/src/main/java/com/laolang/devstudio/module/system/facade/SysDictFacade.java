@@ -15,13 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysDictFacade {
 
-
     /**
      * 字典分组信息
      */
     public List<SysDictTypeGroupInfoRes> typeGroupInfo() {
         return Lists.newArrayList(new SysDictTypeGroupInfoRes().setGroupCode("system").setGroupName("系统字典"));
     }
-
 
 }

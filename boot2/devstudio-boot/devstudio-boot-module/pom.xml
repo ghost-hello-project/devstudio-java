@@ -13,8 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>devstudio-boot-module-system</module>
-        <module>devstudio-boot-module-system/devstudio-boot-module-system-biz</module>
-        <module>devstudio-boot-module-system/devstudio-boot-module-system-api</module>
     </modules>
 
 

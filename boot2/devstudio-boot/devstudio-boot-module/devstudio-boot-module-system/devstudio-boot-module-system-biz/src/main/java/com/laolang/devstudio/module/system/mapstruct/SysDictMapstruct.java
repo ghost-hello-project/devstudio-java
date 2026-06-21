@@ -14,7 +14,6 @@ public interface SysDictMapstruct {
 
     /**
      * 字典分组信息转换
-     *
      * @param code 字典分组编码
      * @return 字典分组信息
      */
@@ -25,8 +24,9 @@ public interface SysDictMapstruct {
         SysDictTypeEnums.GroupCode groupCode = SysDictTypeEnums.GroupCode.getByCode(code).orElse(null);
         if (Objects.isNull(groupCode)) {
             return new SysDictTypeGroupInfoRes().setGroupCode(SysDictTypeEnums.GroupCode.UNKNOWN_CODE)
-                    .setGroupName(SysDictTypeEnums.GroupCode.UNKNOWN_DESC);
+                .setGroupName(SysDictTypeEnums.GroupCode.UNKNOWN_DESC);
         }
         return new SysDictTypeGroupInfoRes().setGroupCode(groupCode.getCode()).setGroupName(groupCode.getDesc());
     }
+
 }
