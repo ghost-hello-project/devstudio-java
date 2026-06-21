@@ -24,9 +24,9 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("thresh")
                         .version("0.1")
-                        .description("小东子, 给我狠狠地淦留学生 (*￣︶￣)")
-                        .termsOfService("https://gitee.com/bzrj")
-                        .license(new License().name("MIT").url("https://gitee.com/bzrj"))
+                        .description("本地开发工作室")
+                        .termsOfService("https://github.com/laolang2016")
+                        .license(new License().name("MIT").url("https://github.com/laolang2016"))
                 );
     }
 }
