@@ -1,0 +1,47 @@
+name: Build & Pack Release
+'on':
+  push:
+    branches:
+      - release_0.0.1
+jobs:
+  clone:
+    name: "克隆代码"
+    runs-on: linux-amd64
+    steps:
+      - name: "克隆后端"
+        run: |
+          ls -al
+          pwd
+          echo '克隆代码'
+        working-directory: /home/laolang/app/devstudio-java-boot2/boot
+
+  compile-backend:
+    name: "编译后端"
+    needs: [clone]
+    runs-on: linux-amd64
+    steps:
+      - name: "mvn clean install"
+        run: |
+          echo '编译后端'
+        working-directory: /home/laolang/app/devstudio-java-boot2/boot
+
+  stop-server:
+    name: "停止服务"
+    needs: [compile-backend]
+    runs-on: linux-amd64
+    steps:
+      - name: "停止服务"
+        run: |
+          echo '停止服务'
+        working-directory: /home/laolang/app/devstudio-java-boot2/boot
+
+  start-server:
+    name: "启动服务"
+    needs: [stop-server]
+    runs-on: linux-amd64
+    steps:
+      - name: "启动服务"
+        run: |
+          echo '启动服务'
+        working-directory: /home/laolang/app/devstudio-java-boot2/boot
+
