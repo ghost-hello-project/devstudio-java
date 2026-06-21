@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.laolang.devstudio.framework.common.bizcode.CommonBizCode;
 import com.laolang.devstudio.framework.common.exception.BusinessException;
 import com.laolang.devstudio.framework.common.util.TraceUtil;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import java.util.Map;
  *
  * @param <T> 接口返回类型
  */
+@Schema(description = "统一响应结构")
 @Accessors(chain = true)
 @Data
 public class R<T> {
@@ -25,36 +27,43 @@ public class R<T> {
     /**
      * 接口请求结果的业务状态吗.
      */
+    @Schema(description = "接口请求结果的业务状态吗")
     private String code;
 
     /**
      * 判断接口请求是否成功的唯一标识.
      */
+    @Schema(description = "判断接口请求是否成功的唯一标识")
     private Boolean success;
 
     /**
      * 提示信息.
      */
+    @Schema(description = "提示信息")
     private String msg;
 
     /**
      * 数据体.
      */
+    @Schema(description = "数据体")
     private T body;
 
     /**
      * 扩充字段,正常情况下此字段为空，当此字段有值时，意味着当前接口结构不稳定，以后会修改,即保持 extra 为空.
      */
+    @Schema(description = "扩充字段,正常情况下此字段为空，当此字段有值时，意味着当前接口结构不稳定，以后会修改,即保持 extra 为空.")
     private Map<String, Object> extra;
 
     /**
      * traceId
      */
+    @Schema(description = "traceId")
     private String tid;
 
     /**
      * 接口返回时间
      */
+    @Schema(description = "接口返回时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     private LocalDateTime time;
 

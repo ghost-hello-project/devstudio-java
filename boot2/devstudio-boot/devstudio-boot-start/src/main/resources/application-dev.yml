@@ -18,6 +18,9 @@ spring:
     resources:
       add-mappings: false
 
+knife4j:
+  enable: true
+
 logging:
   config: classpath:log4j2-dev.xml
 

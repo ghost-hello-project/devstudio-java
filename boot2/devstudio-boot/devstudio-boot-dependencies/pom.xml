@@ -18,6 +18,8 @@
 
         <tlog.version>1.5.0</tlog.version>
 
+        <knife4j.version>4.4.0</knife4j.version>
+
         <!-- tool -->
         <hutool.version>5.8.26</hutool.version>
         <vavr.version>0.10.4</vavr.version>
@@ -33,6 +35,13 @@
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- swagger -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <!-- TLog -->
