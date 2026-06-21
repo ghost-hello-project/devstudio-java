@@ -1,0 +1,12 @@
+.idea/
+
+target/
+
+logs/
+
+.flattened-pom.xml
+
+tmp/
+
+
+
