@@ -1,8 +1,6 @@
-name: Build & Pack Release
+name: boot2 后端
 'on':
-  push:
-    branches:
-      - release_0.0.1
+  workflow_dispatch:
 jobs:
   clone:
     name: "克隆代码"
